@@ -1,4 +1,4 @@
-const classes = ["senior", "freshman"]
+const classes = ["Senior","Juniors" ,"Sophmore" ,"Freshman"]
 const studentIDs = ["1234"];
 
 function dropDownClick(year) {
