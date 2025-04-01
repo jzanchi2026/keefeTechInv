@@ -47,16 +47,15 @@
       console.log(password);
       // Prepare data to be sent to the backend
       const url = "http://localhost:3000/login";
-      const fd = new FormData();
-      fd.append("email", email);
-      fd.append("password", password);
+      const fd = JSON.stringify({email: email, password: password});
       // Create AJAX request
       try {
       const response = await fetch(url, {method: "POST", 
         body: fd, 
+        credentials: "include",
         headers: 
         {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
         }
       });
       if (!response.ok) {
