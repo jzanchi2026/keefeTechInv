@@ -105,7 +105,7 @@
             document.getElementsByClassName("grid-container")[0].appendChild(cardBtn);
 
             //Inputting the name typed in and putting it into the text
-            innerCardText.innerText = document.getElementById('nameInput').value; 
+            innerCardText.innerText = document.getElementById('nameInput').value + " Amount: " + document.getElementById("quantityInput").value; 
             //Inserting the text into the card
             cardBorder.appendChild(innerCardText);
 
