@@ -67,7 +67,7 @@
           console.log("Parsed JSON:", json);
 
           if (json.login === true) {
-            window.location.href = "https://develmets.skiscratcher.com/demo"; // 🔁 Redirect on success
+            window.location.href = "itemlist.html"; // 🔁 Redirect on success
           } else {
             alert("Login failed. Please check your email and password.");
           }
@@ -96,7 +96,7 @@
           console.log("Session check:", data);
 
           if (data.loggedIn) {
-            window.location.href = "https://develmets.skiscratcher.com/demo";
+            window.location.href = "itemlist.html";
           }
         } else {
           console.warn("Server did not return JSON.");
