@@ -76,27 +76,6 @@
       alert("Login request failed.");
     }
   }
-  window.onload = async function () {
-  try {
-        const response = await fetch("https://develmets.skiscratcher.com/session-check", {
-          method: "GET",
-          credentials: "include"
-        });
-
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-          const data = await response.json();
-          console.log("Session check:", data);
-          if (data.loggedIn) {
-            window.location.href = "itemlist.html";
-          }
-        } else {
-          console.warn("Server did not return JSON.");
-        }
-      } catch (error) {
-        console.error("Error during session check:", error.message);
-      }
-    };
 </script>
 
 </body>
