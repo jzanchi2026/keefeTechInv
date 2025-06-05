@@ -132,15 +132,11 @@ async function loadTools() {
     var spawnCondition = document.getElementById("nameInput")
     var spawnCondition2 = document.getElementById("quantityInput")
 
-    if (!nameInput || !quantityInput) {
-    alert("Please fill in all fields.");
-    return;
-    }
-
     const newTool = {
-      toolName: nameInput,
-      quantity: quantityInput
+      toolName: document.getElementById("nameInput").value,
+      quantity: document.getElementById("quantityInput").value
     };
+
 
     try {
       const response = await fetch("https://develmets.skiscratcher.com/addTool", {
@@ -148,7 +144,7 @@ async function loadTools() {
         headers: {
           "Content-Type": "application/json"
         },
-        credentials: "include", // needed if your backend uses session cookies
+        credentials: "include", 
         body: JSON.stringify(newTool)
       });
 
@@ -192,7 +188,7 @@ async function loadTools() {
       //Setting all previous values the user typed into as blank to prepare for next card creation
       spawnCondition.value = "";
       document.getElementById("nameInput").value = spawnCondition.value;
-      document.getElementById("quantityInput").value = spawnCondition.value;
+      document.getElementById("quantityInput").value = spawnCondition2.value;
       document.getElementById("imageInput").value = spawnCondition.value;
       document.getElementById('imagePreview').innerHTML = '';
     }
