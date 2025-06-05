@@ -156,7 +156,6 @@ async function loadTools() {
         "Content-Type": "application/x-www-form-urlencoded"
       },
       credentials: "include",
-      body: JSON.stringify(newTool)
     });
 
     const responseText = await response.text();
