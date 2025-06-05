@@ -113,7 +113,7 @@ async function loadTools() {
         cardBorder.classList.add("border");
         cardBtn.classList.add("grid-item");
 
-        innerCardText.innerText = `${tool.name} - Amount: ${tool.quantity}`;
+        innerCardText.innerText = `${tool.toolName} - Amount: ${tool.quantity}`;
         cardBorder.appendChild(innerCardText);
         cardBtn.appendChild(cardBorder);
         container.appendChild(cardBtn);
