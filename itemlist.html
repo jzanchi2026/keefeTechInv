@@ -51,10 +51,8 @@
       <!--What type of account they have (student or admin)-->
       <h5 id="Account">Student Account</h5>
       <button type="button" class="btn Manage account" onclick="closeForm()">Manage Account</button> 
-      <a href="login.html">
       <!--Log out of your account and bring you back to the login page--> 
       <button type="button" class="btn logout" onclick="logout()" >logout</button>
-      </a>
       <!--Closes the profile button and goes back to the item page-->
       <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
     </form>
@@ -142,20 +140,20 @@
           try {
             // Call the remote backend logout endpoint
             const response = await fetch("https://develmets.skiscratcher.com/logout", {
-              method: "GET", // or GET, depending on your backend
+              method: "GET", 
               credentials: "include"
             });
 
             if (response.ok) {
               console.log("Successfully logged out from remote server.");
-              window.location.href = "login.html";
+              
             } else {
               console.warn("Remote logout failed:", response.status);
             }
           } catch (error) {
             console.error("Logout request failed:", error);
           }
-
+          window.location.href = "login.html";
 
         }
 
