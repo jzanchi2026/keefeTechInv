@@ -138,28 +138,24 @@
         }
         async function logout() {
           try {
+            // Call the remote backend logout endpoint
             const response = await fetch("https://develmets.skiscratcher.com/logout", {
-              method: "GET",
+              method: "GET", 
               credentials: "include"
             });
 
             if (response.ok) {
               console.log("Successfully logged out from remote server.");
-
-              // Slight delay to give the server time to clear session
-              setTimeout(() => {
-                window.location.href = "login.html";
-              }, 500); // 0.5 second delay
+              window.location.href = "login.html";
             } else {
               console.warn("Remote logout failed:", response.status);
-              alert("Logout failed. Try again.");
             }
           } catch (error) {
             console.error("Logout request failed:", error);
-            alert("Logout failed due to network error.");
           }
-        }
+          
 
+        }
 
         //Alert Invalid File Type Keeps Popping Up, No Preview Div Currently
         function fileValidation() { 
