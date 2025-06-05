@@ -146,14 +146,14 @@
 
             if (response.ok) {
               console.log("Successfully logged out from remote server.");
-              
+              window.location.href = "login.html";
             } else {
               console.warn("Remote logout failed:", response.status);
             }
           } catch (error) {
             console.error("Logout request failed:", error);
           }
-          window.location.href = "login.html";
+          
 
         }
 
