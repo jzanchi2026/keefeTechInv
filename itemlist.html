@@ -86,110 +86,150 @@
   </div>
 
 <script>
-        function itemSpawn() {
-          //Simple check to make sure user input proper values into the card create
-          var spawnCondition = document.getElementById("nameInput")
-          var spawnCondition2 = document.getElementById("quantityInput")
+
+
+async function loadTools() {
+    try {
+      const response = await fetch("https://develmets.skiscratcher.com/getTools", {
+        method: "GET",
+        credentials: "include"
+      });
+
+      if (!response.ok) {
+        console.error("Failed to fetch tools:", response.status);
+        return;
+      }
+
+      const tools = await response.json();
+
+      const container = document.querySelector(".grid-container");
+      container.innerHTML = ""; // Clear existing items
+
+      tools.forEach(tool => {
+        const cardBtn = document.createElement("button");
+        const cardBorder = document.createElement("div");
+        const innerCardText = document.createElement("p");
+
+        cardBorder.classList.add("border");
+        cardBtn.classList.add("grid-item");
+
+        innerCardText.innerText = `${tool.name} - Amount: ${tool.quantity}`;
+        cardBorder.appendChild(innerCardText);
+        cardBtn.appendChild(cardBorder);
+        container.appendChild(cardBtn);
+      });
+
+    } catch (error) {
+      console.error("Error loading tools:", error);
+    }
+  }
+
+  // Call loadTools when the page loads
+  window.addEventListener("DOMContentLoaded", loadTools);
+  function itemSpawn() {
+    //Simple check to make sure user input proper values into the card create
+    var spawnCondition = document.getElementById("nameInput")
+    var spawnCondition2 = document.getElementById("quantityInput")
+
+    if (spawnCondition.value != "" && spawnCondition2.value != "") {
+      //Creating a button, div, and text to place onto screen
+      var cardBtn = document.createElement("Button");
+      const cardBorder = document.createElement("div");
+      const innerCardText = document.createElement("p");
+
+      //Giving border a class for styling purposes
+      cardBorder.classList.add("border");
+      //Placing card into the grid-container in the HTMLs body
+      document.getElementsByClassName("grid-container")[0].appendChild(cardBtn);
+
+      //Inputting the name typed in and putting it into the text
+      innerCardText.innerText = document.getElementById('nameInput').value + " Amount: " + document.getElementById("quantityInput").value; 
+      //Inserting the text into the card
+      cardBorder.appendChild(innerCardText);
+
+      //Setting buttons class to grid-item for styling
+      cardBtn.setAttribute("class", "grid-item");
+      //Inserting the border into the card
+      cardBtn.appendChild(cardBorder);
+
+      //Setting all previous values the user typed into as blank to prepare for next card creation
+      spawnCondition.value = "";
+      document.getElementById("nameInput").value = spawnCondition.value;
+      document.getElementById("quantityInput").value = spawnCondition.value;
+      document.getElementById("imageInput").value = spawnCondition.value;
+      document.getElementById('imagePreview').innerHTML = '';
+    }
+  }
+
+
+  function openItemForm() {
+    document.getElementById("myItemForm").style.display = "block";
+  }
+  function closeItemForm() {
+    document.getElementById("myItemForm").style.display = "none";
+  }
+  
+
+  function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
+  async function logout() {
+    try {
+      // Call the remote backend logout endpoint
+      const response = await fetch("https://develmets.skiscratcher.com/logout", {
+        method: "GET", 
+        credentials: "include"
+      });
+
+      if (response.ok) {
+        console.log("Successfully logged out from remote server.");
+        window.location.href = "login.html";
+      } else {
+        console.warn("Remote logout failed:", response.status);
+      }
+    } catch (error) {
+      console.error("Logout request failed:", error);
+    }
+    
+
+  }
+
+  //Alert Invalid File Type Keeps Popping Up, No Preview Div Currently
+  function fileValidation() { 
+    var imageConvert = document.getElementById('imageInput');
+    var imageValue = imageConvert.value;
+    var allowExtension = /(\.jpg|\.jpeg|\.png)$/i;
       
-          if (spawnCondition.value != "" && spawnCondition2.value != "") {
-            //Creating a button, div, and text to place onto screen
-            var cardBtn = document.createElement("Button");
-            const cardBorder = document.createElement("div");
-            const innerCardText = document.createElement("p");
+    if (!allowExtension.exec(imageValue)) {
+      alert('Invalid file type');
+      imageConvert.value = '';
+      return false;
+    }
+    else {
+      if (imageConvert.files && imageConvert.files[0]) {
+        var fileReader = new FileReader();
+        fileReader.onload = function(e) {
+          document.getElementById('imagePreview').innerHTML = '<img src="' + e.target.result + '"/>';
+        };
+        fileReader.readAsDataURL(imageConvert.files[0]);
+      }
+    }
 
-            //Giving border a class for styling purposes
-            cardBorder.classList.add("border");
-            //Placing card into the grid-container in the HTMLs body
-            document.getElementsByClassName("grid-container")[0].appendChild(cardBtn);
-
-            //Inputting the name typed in and putting it into the text
-            innerCardText.innerText = document.getElementById('nameInput').value + " Amount: " + document.getElementById("quantityInput").value; 
-            //Inserting the text into the card
-            cardBorder.appendChild(innerCardText);
-
-            //Setting buttons class to grid-item for styling
-            cardBtn.setAttribute("class", "grid-item");
-            //Inserting the border into the card
-            cardBtn.appendChild(cardBorder);
-
-            //Setting all previous values the user typed into as blank to prepare for next card creation
-            spawnCondition.value = "";
-            document.getElementById("nameInput").value = spawnCondition.value;
-            document.getElementById("quantityInput").value = spawnCondition.value;
-            document.getElementById("imageInput").value = spawnCondition.value;
-            document.getElementById('imagePreview').innerHTML = '';
-          }
-        }
-
-
-        function openItemForm() {
-          document.getElementById("myItemForm").style.display = "block";
-        }
-        function closeItemForm() {
-          document.getElementById("myItemForm").style.display = "none";
-        }
-        
-
-        function openForm() {
-          document.getElementById("myForm").style.display = "block";
-        }
-        function closeForm() {
-          document.getElementById("myForm").style.display = "none";
-        }
-        async function logout() {
-          try {
-            // Call the remote backend logout endpoint
-            const response = await fetch("https://develmets.skiscratcher.com/logout", {
-              method: "GET", 
-              credentials: "include"
-            });
-
-            if (response.ok) {
-              console.log("Successfully logged out from remote server.");
-              window.location.href = "login.html";
-            } else {
-              console.warn("Remote logout failed:", response.status);
-            }
-          } catch (error) {
-            console.error("Logout request failed:", error);
-          }
-          
-
-        }
-
-        //Alert Invalid File Type Keeps Popping Up, No Preview Div Currently
-        function fileValidation() { 
-          var imageConvert = document.getElementById('imageInput');
-          var imageValue = imageConvert.value;
-          var allowExtension = /(\.jpg|\.jpeg|\.png)$/i;
-            
-          if (!allowExtension.exec(imageValue)) {
-            alert('Invalid file type');
-            imageConvert.value = '';
-            return false;
-          }
-          else {
-            if (imageConvert.files && imageConvert.files[0]) {
-              var fileReader = new FileReader();
-              fileReader.onload = function(e) {
-                document.getElementById('imagePreview').innerHTML = '<img src="' + e.target.result + '"/>';
-              };
-              fileReader.readAsDataURL(imageConvert.files[0]);
-            }
-          }
-
-        }
-      </script>
-      <script>
-        function myFunction() {
-          var x = document.getElementById("myTopnav");
-          if (x.className === "topnav") {
-            x.className += " responsive";
-          } else {
-            x.className = "topnav";
-          }
-      } 
-      </script>
+  }
+</script>
+<script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+} 
+</script>
 
 </body>
 
