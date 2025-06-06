@@ -86,11 +86,11 @@ body {
   font-size: small;
 }
 #logoBox{
-  width: 450px;
-  height: 450px;
-  position: absolute;
-  left: 50%;
-  top: 10%;
+  width: 350px;
+    height: 350px;
+    position: absolute;
+    left: 50%;
+    top: 20%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 
