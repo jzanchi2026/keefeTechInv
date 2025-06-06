@@ -85,10 +85,12 @@ body {
   border: solid white;
   font-size: small;
 }
-.mainLogo{
+.logoBox{
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 10%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  width: 450px;
+  height: 450px;
 }
