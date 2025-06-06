@@ -37,13 +37,13 @@
   border-radius: 45px;
   padding: 20px;
   margin: 0;
-  position: absolute;
-  top: 50%;
+  position: static;
+  top: 80%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 550px;
-  height: 550px;
+  width: 450px;
+  height: 450px;
   font-size: 30px;
   text-align: center;
 }
@@ -84,4 +84,8 @@ body {
   margin-top: 12px;
   border: solid white;
   font-size: small;
+}
+.mainLogo{
+  position: static;
+  left: 50%;
 }
