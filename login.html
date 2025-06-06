@@ -24,8 +24,9 @@
         <input type="password" id="myInput" name="password" required placeholder="Enter your password" />
 
         <div class="show-password">
-          <input type="checkbox" onclick="document.getElementById('myInput').type = this.checked ? 'text' : 'password'" />
-          <p>Show Password</p>
+          <label>
+            <input type="checkbox" onclick="document.getElementById('myInput').type = this.checked ? 'text' : 'password'" />
+          Show Password</label>
         </div>
 
         <button type="button" class="login-button" onclick="loginUser()">Login</button>
