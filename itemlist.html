@@ -187,15 +187,22 @@ async function loadTools() {
     console.log("Backend response:", responseText);
 
     if (response.ok) {
+      // Success path
       document.getElementById("nameInput").value = "";
       document.getElementById("quantityInput").value = "";
-      document.getElementById("imageInput").value = "";
-      document.getElementById("imagePreview").innerHTML = "";
-
       closeItemForm();
       await loadTools();
     } else {
-      alert("Error adding tool: " + responseText);
+      // Error, but maybe item was still created
+      if (responseText.toLowerCase().includes("created")) {
+        // Treat as success
+        document.getElementById("nameInput").value = "";
+        document.getElementById("quantityInput").value = "";
+        closeItemForm();
+        await loadTools();
+      } else {
+        alert("Error adding tool: " + responseText);
+      }
     }
   } catch (error) {
     console.error("Network or server error:", error);
