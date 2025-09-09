@@ -198,8 +198,8 @@ nav img{
 .border {
     border: 3px solid #d32f2f;
     border-radius: 25px;
-    color: #d32f2f;
-    background-color: white;
+    color: white;
+    background-color: red;
     font-weight: bold;
     font-size: 1.1em;
 }
