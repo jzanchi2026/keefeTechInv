@@ -206,121 +206,132 @@ nav img{
 .grid-container {
     margin: auto;
     display: grid;
-    width: 1750px;
-    grid-template-columns:  25% 25% 25% 25%;
-    padding: 175px;
-    padding-top: 70px;
+    width: 90vw;
+    max-width: 1600px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px 30px;
+    padding: 140px 40px 40px 40px;
+    background: #fff;
+    border-radius: 20px;
+    box-sizing: border-box;
 }
 .grid-item {
-    border-radius: 25px;
+    border-radius: 18px;
     background-color: #fff;
-    border: 3px solid #d32f2f;
-    padding: 20px;
-    margin: 85px 60px 30px 60px;
-    width: 200px;
-    font-size: 30px;
+    border: 2.5px solid #d32f2f;
+    padding: 32px 18px 18px 18px;
+    margin: 0;
+    min-width: 0;
+    min-height: 180px;
+    font-size: 1.25em;
     text-align: center;
-    box-shadow: 0px 0px 10px rgba(211,47,47,0.08);
-    color: #d32f2f;
-    font-weight: bold;
+    box-shadow: 0 4px 18px 0 rgba(211,47,47,0.10);
+    color: #b30000;
+    font-weight: 600;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: box-shadow 0.2s;
 }
 
-.buttonOrange {
-    background-color: #d32f2f;
-    border: none;
-    color: #ffffff;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    box-shadow: 0px 0px 10px rgba(211,47,47,0.08);
+.grid-item:hover {
+    box-shadow: 0 8px 32px 0 rgba(211,47,47,0.18);
+    border-color: #b71c1c;
 }
 
-.tool-button{ 
-    border-radius: 50%;
-    height: 65px;
-    width: 65px;
-    font-size: 40px;
-    cursor: pointer;
-    position: fixed;
-    bottom: 17px;
-    right: 20px;
-}
-
-.tool-popup {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    right: 15px;
-    border: 5px solid #d32f2f;
-    z-index: 9;
-    border-radius: 25px;
-    background: white;
-}
-  
-.tool-container {
-    max-width: 300px;
-    padding: 10px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.08);
-}
-  
-.tool-container input[type=text], .tool-container input[type=password] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    border: none;
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-  
-.tool-container input[type=text]:focus, .tool-container input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
-}
-  
-.tool-container .btn {
-    background-color: #d32f2f;
-    color: white;
-    font-weight: bold;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom:10px;
-    opacity: 1;
-    border-radius: 10px;
-    transition: background 0.2s;
-}
-  
-.tool-container .cancel {
-    background-color: #b71c1c;
-}
-  
-.tool-container .btn:hover, .open-button:hover {
-    background-color: #b71c1c;
-}
-/* Remove Button for Cards */
+/* --- Remove Button Styling (inside card) --- */
 .remove-btn {
     background-color: #d32f2f;
     color: #fff;
     border: none;
-    border-radius: 8px;
-    padding: 8px 18px;
-    margin: 10px 0 0 0;
+    border-radius: 7px;
+    padding: 7px 0;
     font-size: 1em;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
-    box-shadow: 0px 0px 6px rgba(211,47,47,0.08);
+    transition: background 0.18s, box-shadow 0.18s;
+    box-shadow: 0 2px 8px rgba(211,47,47,0.08);
+    width: 80%;
+    margin: 18px auto 0 auto;
     display: block;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    letter-spacing: 1px;
 }
+
 .remove-btn:hover {
     background-color: #b71c1c;
+    box-shadow: 0 4px 16px rgba(211,47,47,0.16);
+}
+
+/* --- Title Styling --- */
+.title {
+    text-align: center;
+    font-size: 2.5em;
+    color: #d32f2f;
+    font-weight: 700;
+    margin-top: 120px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    font-family: 'Oswald', Arial, sans-serif;
+}
+
+/* --- Add Button Styling --- */
+.tool-button {
+    background-color: #d32f2f;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    font-size: 2.2em;
+    cursor: pointer;
+    position: fixed;
+    bottom: 30px;
+    right: 35px;
+    box-shadow: 0 2px 12px rgba(211,47,47,0.12);
+    transition: background 0.18s;
+    z-index: 10;
+}
+
+.tool-button:hover {
+    background-color: #b71c1c;
+}
+
+/* --- Navigation Bar --- */
+nav, .topnav {
+    background-color: #d32f2f !important;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(211,47,47,0.08);
+}
+
+.topnav a {
+    color: #fff;
+}
+
+.topnav a:hover {
+    background-color: #b71c1c;
+    color: #fff;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        padding: 120px 10px 30px 10px;
+    }
+    .title {
+        font-size: 2em;
+        margin-top: 100px;
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        padding: 100px 2vw 20px 2vw;
+    }
+    .title {
+        font-size: 1.8em;
+        margin-top: 80px;
+    }
 }
