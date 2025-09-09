@@ -147,10 +147,11 @@ async function loadTools() {
             }
           }
         };
-        cardBorder.appendChild(RemoveBtn); // <-- Place inside border
+        
 
         cardBtn.appendChild(cardBorder);
         container.appendChild(cardBtn);
+        cardBorder.appendChild(RemoveBtn); // <-- Place inside border
       });
 
     } catch (error) {
