@@ -8,16 +8,11 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    font-family: 'Oswald', Arial, sans-serif;
+    color: #b30000;
     margin: 0;
-    background: #005cd4;
-}
-
-.header {
-    padding: 40px;
-    background: #ff9900;
-    color: #3936f7;
-    border: 1px solid white;
+    min-height: 100vh;
 }
 
 .prof{
@@ -33,7 +28,7 @@ body {
   
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
-    background-color: #711345;
+    background-color: #d32f2f;
     color: white;
     padding: 16px 20px;
     border-radius: 50%;
@@ -44,6 +39,8 @@ body {
     position: fixed;
     top: 23px;
     right: 28px;
+    border: none;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.08);
 }
 
 .form-popup {
@@ -51,17 +48,19 @@ body {
     position: fixed;
     top: 0;
     right: 15px;
-    border: 3px solid #f1f1f1;
+    border: 3px solid #d32f2f;
     z-index: 9;
     border-radius: 25px;
-  }
+    background: white;
+}
   
   /*----------------Add styles to the form container----------------*/
-  .form-container {
+.form-container {
     max-width: 300px;
     padding: 10px;
     background-color: white;
     border-radius: 25px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.08);
 }
 
 .form-container input[type=text], .form-container input[type=password] {
@@ -85,19 +84,23 @@ body {
     cursor: pointer;
     border-radius: 25px;
     margin-bottom:10px;
-    opacity: 0.8;
+    opacity: 0.9;
     width: 100%;
+    background-color: #d32f2f;
+    font-weight: bold;
+    padding: 14px 0;
+    transition: background 0.2s;
 }
   
 /* Add a red background color to the cancel button */
 .form-container .cancel {
-    background-color: red;
+    background-color: #b71c1c;
     padding: 16px 20px;
 }
   
 /* Add a background color to the logout button */
 .form-container .logout {
-    background-color: #e66700;
+    background-color: #d32f2f;
     padding: 6px 10px;
 }
 
@@ -109,32 +112,34 @@ body {
 /*HOTBAR STUFF*/
 .topnav {
     overflow: hidden;
-    background-color: #ff9900;
+    background-color: #d32f2f;
 }
 
 .topnav a {
     display: inline-block;
-    color: #332d2d;
+    color: #fff;
     margin: auto;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    font-weight: bold;
 }
 
 .topnav a:hover {
-    background-color: #005cd4;
-    color: rgba(255, 255, 255, 0.959);
+    background-color: #b71c1c;
+    color: #fff;
 }
 
 nav{
     position: fixed;
-    background-color: #ff9900;
+    background-color: #d32f2f;
     width: 100%;  
     height: 100px; 
     font-family: "Oswald", sans-serif;
     list-style-type: none;
     display: inline-flex;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.08);
 }  
 
 nav img{
@@ -147,8 +152,10 @@ nav img{
     font-size: 60px;
     float: left;
     margin-left: 30px;
-    color: rgb(36, 54, 114);
+    color: #fff;
     padding-right: 60px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
 /* This is what popups when clicking on card*/
@@ -189,10 +196,12 @@ nav img{
 
 /* For Item Cards*/
 .border {
-    border: 3px solid black;
+    border: 3px solid #d32f2f;
     border-radius: 25px;
-    color: black;
+    color: #d32f2f;
     background-color: white;
+    font-weight: bold;
+    font-size: 1.1em;
 }
 .grid-container {
     margin: auto;
@@ -204,17 +213,20 @@ nav img{
 }
 .grid-item {
     border-radius: 25px;
-    background-color: rgb(255, 108, 11);
-    border: 3px solid black;
+    background-color: #fff;
+    border: 3px solid #d32f2f;
     padding: 20px;
     margin: 85px 60px 30px 60px;
     width: 200px;
     font-size: 30px;
     text-align: center;
+    box-shadow: 0px 0px 10px rgba(211,47,47,0.08);
+    color: #d32f2f;
+    font-weight: bold;
 }
 
 .buttonOrange {
-    background-color: #ff9900;
+    background-color: #d32f2f;
     border: none;
     color: #ffffff;
     text-align: center;
@@ -223,6 +235,7 @@ nav img{
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(211,47,47,0.08);
 }
 
 .tool-button{ 
@@ -241,16 +254,18 @@ nav img{
     position: fixed;
     bottom: 0;
     right: 15px;
-    border: 5px solid orange;
+    border: 5px solid #d32f2f;
     z-index: 9;
     border-radius: 25px;
+    background: white;
 }
   
 .tool-container {
     max-width: 300px;
     padding: 10px;
-    background-color: orangered;
+    background-color: white;
     border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.08);
 }
   
 .tool-container input[type=text], .tool-container input[type=password] {
@@ -268,7 +283,7 @@ nav img{
 }
   
 .tool-container .btn {
-    background-color: #00a754c9;
+    background-color: #d32f2f;
     color: white;
     font-weight: bold;
     padding: 16px 20px;
@@ -278,12 +293,34 @@ nav img{
     margin-bottom:10px;
     opacity: 1;
     border-radius: 10px;
+    transition: background 0.2s;
 }
   
 .tool-container .cancel {
-    background-color: rgb(189, 0, 0);
+    background-color: #b71c1c;
 }
   
 .tool-container .btn:hover, .open-button:hover {
-    background-color: #0564e0;
+    background-color: #b71c1c;
+}
+/* Remove Button for Cards */
+.remove-btn {
+    background-color: #d32f2f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    margin: 10px 0 0 0;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0px 0px 6px rgba(211,47,47,0.08);
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.remove-btn:hover {
+    background-color: #b71c1c;
 }

@@ -25,7 +25,7 @@
 
     <!--Navigation Bar-->
     <div class="topnav" id="myTopnav">
-      <a href="#classes"><b><i>CLASSES</a></b></i>
+      <a href="../keefeTechInv/class.html"><b><i>CLASSES</a></b></i>
       <a href="#items"><b><i>ITEMS</a></b></i>
       <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars"></i>
@@ -109,6 +109,7 @@ async function loadTools() {
         const cardBtn = document.createElement("button");
         const cardBorder = document.createElement("div");
         const innerCardText = document.createElement("p");
+        const RemoveBtn = document.createElement("button");
 
         cardBorder.classList.add("border");
         cardBtn.classList.add("grid-item");
@@ -117,6 +118,38 @@ async function loadTools() {
         cardBorder.appendChild(innerCardText);
         cardBtn.appendChild(cardBorder);
         container.appendChild(cardBtn);
+
+        RemoveBtn.innerText = "Remove";
+        RemoveBtn.classList.add("remove-btn");
+        RemoveBtn.onclick = async function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          if (confirm(`Are you sure you want to remove ${tool.toolName}?`)) {
+            try {
+              // Try to delete the tool from backend
+              const fd = new URLSearchParams({
+                name: tool.toolName
+              });
+              const response = await fetch("https://develmets.skiscratcher.com/deleteToolType", {
+                method: "POST",
+                body: fd,
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                },
+                credentials: "include"
+              });
+              if (response.ok) {
+                await loadTools();
+              } else {
+                const text = await response.text();
+                alert("Failed to remove tool: " + text);
+              }
+            } catch (err) {
+              alert("Error removing tool: " + err);
+            }
+          }
+        };
+        container.appendChild(RemoveBtn);
       });
 
     } catch (error) {
