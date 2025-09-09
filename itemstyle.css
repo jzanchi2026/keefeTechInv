@@ -132,6 +132,7 @@ body {
 }
 
 nav{
+    z-index: 10;
     position: fixed;
     background-color: #d32f2f;
     width: 100%;  
