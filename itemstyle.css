@@ -246,16 +246,18 @@ nav img{
     color: #fff;
     border: none;
     border-radius: 7px;
-    padding: 7px 0;
-    font-size: 1em;
+    padding: 6px 0;
+    font-size: 0.95em;
     font-weight: 600;
     cursor: pointer;
     transition: background 0.18s, box-shadow 0.18s;
     box-shadow: 0 2px 8px rgba(211,47,47,0.08);
-    width: 80%;
-    margin: 18px auto 0 auto;
+    width: 70%;
+    margin: 16px auto 0 auto;
     display: block;
     letter-spacing: 1px;
+    max-width: 140px;
+    min-width: 80px;
 }
 
 .remove-btn:hover {

@@ -116,9 +116,8 @@ async function loadTools() {
 
         innerCardText.innerText = `${tool.toolName} - Amount: ${tool.quantity}`;
         cardBorder.appendChild(innerCardText);
-        cardBtn.appendChild(cardBorder);
-        container.appendChild(cardBtn);
 
+        // Add Remove button inside the border
         RemoveBtn.innerText = "Remove";
         RemoveBtn.classList.add("remove-btn");
         RemoveBtn.onclick = async function(e) {
@@ -126,7 +125,6 @@ async function loadTools() {
           e.preventDefault();
           if (confirm(`Are you sure you want to remove ${tool.toolName}?`)) {
             try {
-              // Try to delete the tool from backend
               const fd = new URLSearchParams({
                 name: tool.toolName
               });
@@ -149,7 +147,10 @@ async function loadTools() {
             }
           }
         };
-        container.appendChild(RemoveBtn);
+        cardBorder.appendChild(RemoveBtn); // <-- Place inside border
+
+        cardBtn.appendChild(cardBorder);
+        container.appendChild(cardBtn);
       });
 
     } catch (error) {
