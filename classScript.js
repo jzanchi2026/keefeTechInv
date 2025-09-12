@@ -1,6 +1,16 @@
 const classes = ["Senior","Juniors" ,"Sophmore" ,"Freshman"]
 const studentIDs = ["1234"];
 
+function testAddStudent(){
+  var sName = document.getElementById("sName").value;
+  var sEmail = document.getElementById("sEmail").value;
+  var sClass = document.getElementById("sClass").value;
+  document.getElementById("sName").value = "";
+  document.getElementById("sEmail").value = "";
+  document.getElementById("sClass").value = "";
+  addStudentToList(studentIDs.length + 1, sName, sEmail);
+}
+
 function dropDownClick(year) {
   if(classes.includes(year)){
     if(document.getElementById(year + "Drop").innerHTML.charCodeAt(0) == "8595"){
