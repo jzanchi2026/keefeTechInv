@@ -5,10 +5,14 @@ function testAddStudent(){
   var sName = document.getElementById("sName").value;
   var sEmail = document.getElementById("sEmail").value;
   var sClass = document.getElementById("sClass").value;
+  if (!sName || !sEmail || !sClass) {
+    alert("Please fill in all fields.");
+    return;
+  }
   document.getElementById("sName").value = "";
   document.getElementById("sEmail").value = "";
-  document.getElementById("sClass").value = "";
-  addStudentToList(studentIDs.length + 1, sName, sEmail);
+  document.getElementById("sClass").value = classes[0]; // reset to first class
+  addStudent(sClass, studentIDs.length + 1, sEmail, sName, 0);
 }
 
 function dropDownClick(year) {
@@ -254,6 +258,7 @@ function testAddClass(){
   var tName = document.getElementById("cName").value;
   document.getElementById("cName").value = "";
   addNewYear(tName);
+  populateClassDropdown();
 }
 
 function testAddStudent(stdId){
@@ -332,3 +337,18 @@ function confirmDelete(stdId){
     delt[i].remove();
   }
 }
+
+function populateClassDropdown() {
+  const sClassSelect = document.getElementById("sClass");
+  if (!sClassSelect) return;
+  sClassSelect.innerHTML = "";
+  classes.forEach(cls => {
+    const option = document.createElement("option");
+    option.value = cls;
+    option.textContent = cls;
+    sClassSelect.appendChild(option);
+  });
+}
+
+// Call this on page load and after adding a class
+window.addEventListener("DOMContentLoaded", populateClassDropdown);
