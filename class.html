@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
   <head>
@@ -7,132 +7,120 @@
     <title>Classes</title>
     <link href="classStyle.css" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/x-icon" href="images/Logo.png">
+    <!-- Google Fonts for Oswald -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
   </head>
 
   <body>
+    <header style="background:#d32f2f; color:#fff; padding:18px 0 10px 0; text-align:center; box-shadow:0 2px 10px rgba(211,47,47,0.08);">
+      <img src="images/Logo.png" alt="Logo" style="height:48px; vertical-align:middle; margin-right:16px;">
+      <span style="font-size:2em; font-family:'Oswald',Arial,sans-serif; font-weight:700; letter-spacing:2px;">Class Management Dashboard</span>
+    </header>
 
-    <table id="classTable" class="classTable">
-    
-      <tr class="tabHead">
-        <th>classes</th>
-        <th> </th>
-        <th>amount of outbound items</th>
-        <th class="check">  </th>
-      </tr>
-
-      <tbody id="senior" class="classDropDown">
-        <tr class="tabHead">
-          <td> name</td>
-          <td> email</td>
-          <td>amount of out bound items</td>
-          <td class="check"> </td>
-        </tr>
-        <tr class="student">
-          <td> jim</td>
-          <td>fake@gmail.com </td>
-          <td>none</td>
-          <td class="check"> </td>
-        </tr>
-        <tr class="student" id="1234">
-          <td>john</td>
-          <td>fake@gmail.com </td>
-          <td>2</td>
-          <td class="check">
-            <div class="dropdown">
-              <button id="std1234" onclick="dropDownClick('1234')" class="dropbtn">&#8595;</button>
-              <button id="stdBin1234" onclick="deleteThis('1234')" class="dropbtn">&#9003;</button>
-            </div>   
-          </td>
-        </tr>
-        
-        <tr class="tabHead 1234" style="display: none;">
-          <td> item name</td>
-          <td>sku number</td>
-          <td>amount outbound</td>
-          <td class="check"> </td>
-        </tr>
-
-        <tr class="item 1234" style="display: none;">
-          <td> hammer</td>
-          <td>622452</td>
-          <td>1</td>
-          <td class="check"> </td>
-        </tr>
-      </tbody>
-
-      <tbody id="freshman" class="classDropDown">
-        <tr class="tabHead">
-          <td> name</td>
-          <td> email</td>
-          <td>amount of out bound items</td>
-          <td class="check"> </td>
-        </tr>
-        <tr class="student">
-          <td> jim</td>
-          <td>fake@gmail.com </td>
-          <td>none</td>
-          <td class="check"> </td>
-        </tr>
-        <tr class="student">
-          <td>john</td>
-          <td> fake@gmail.com</td>
-          <td>1</td>
-          <td class="check"> </td>
-        </tr>
-      </tbody>
-    </table>
-
-
-  
-    <div id="addClass">
-      <label for="cName"> class name</label><br>
-      <input type="text" id="cName" name="cName"><br>
-      <button onclick="testAddClass()"> add class</button>
-    </div>
-    <div>
-      <h3>
-        students to add
-      </h3>
-      <table id="stdTable">
-        <tr >
-          <th>
-            student name
-          </th>
-          <th>
-            email
-          </th>
-          <th>
-            class To Add
-          </th>
-          <th>
-            submit
-          </th>
-        </tr>
-        <tr id="add6543">
-          <td>
-            jimie
-          </td>
-          <td>
-            jimie@fake.coj
-          </td>
-          <td>
-            <select id="slt6543">
-              <option value="Freshman">Freshman</option>
-              <option value="Sophmore">Sophmore</option>
-              <option value="Junior">Junior</option>
-              <option value="Senior">Senior</option>
-            </select>
-          </td>
-          <td>
-            <button onclick="testAddStudent('6543')">add student</button>
-          </td>
-        </tr>
-        
+    <main style="margin-top:32px;">
+      <table id="classTable" class="classTable">
+        <thead>
+          <tr class="tabHead">
+            <th>Class</th>
+            <th> </th>
+            <th>Outbound Items</th>
+            <th class="check">  </th>
+          </tr>
+        </thead>
+        <tbody id="senior" class="classDropDown">
+          <tr class="tabHead">
+            <td>Name</td>
+            <td>Email</td>
+            <td>Outbound Items</td>
+            <td class="check"> </td>
+          </tr>
+          <tr class="student">
+            <td>Jim</td>
+            <td>fake@gmail.com</td>
+            <td>None</td>
+            <td class="check"> </td>
+          </tr>
+          <tr class="student" id="1234">
+            <td>John</td>
+            <td>fake@gmail.com</td>
+            <td>2</td>
+            <td class="check">
+              <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDetails('1234')">Details</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="tabHead 1234" style="display: none;">
+            <td>Item Name</td>
+            <td>SKU Number</td>
+            <td>Amount Outbound</td>
+            <td class="check"> </td>
+          </tr>
+          <tr class="item 1234" style="display: none;">
+            <td>Hammer</td>
+            <td>622452</td>
+            <td>1</td>
+            <td class="check"> </td>
+          </tr>
+        </tbody>
+        <tbody id="freshman" class="classDropDown">
+          <tr class="tabHead">
+            <td>Name</td>
+            <td>Email</td>
+            <td>Outbound Items</td>
+            <td class="check"> </td>
+          </tr>
+          <tr class="student">
+            <td>Jim</td>
+            <td>fake@gmail.com</td>
+            <td>None</td>
+            <td class="check"> </td>
+          </tr>
+          <tr class="student">
+            <td>John</td>
+            <td>fake@gmail.com</td>
+            <td>1</td>
+            <td class="check"> </td>
+          </tr>
+        </tbody>
       </table>
-    </div>
-    
-    <script src="classScript.js"></script>
-    
-  </body>
 
+      <div id="addClass">
+        <label for="cName">Class Name</label><br>
+        <input type="text" id="cName" name="cName" placeholder="Enter new class name"><br>
+        <button onclick="testAddClass()">Add Class</button>
+      </div>
+
+      <div>
+        <h3>Students to Add</h3>
+        <table id="stdTable">
+          <tr>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>Class</th>
+            <th>Action</th>
+          </tr>
+          <tr id="add6543">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+    </main>
+
+    <script>
+      // Toggle details for student outbound items
+      function toggleDetails(id) {
+        const rows = document.querySelectorAll('.' + id);
+        rows.forEach(row => {
+          row.style.display = (row.style.display === 'none' || row.style.display === '') ? 'table-row' : 'none';
+        });
+      }
+    </script>
+    <script src="classScript.js"></script>
+  </body>
 </html>
