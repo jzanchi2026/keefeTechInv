@@ -263,7 +263,7 @@ function testAddClass(){
 
 function testAddStudent(stdId){
   const stdElem = document.getElementById("add"+stdId);
-  var stdYear = document.getElementById("slt"+stdId).value;
+  var stdYear = document.getElementById("slt").value;
   var stdEmail = stdElem.cells[1].innerHTML;
   var stdName = stdElem.cells[0].innerHTML;
   console.log(stdYear + ", " + stdEmail + ", " + stdName);

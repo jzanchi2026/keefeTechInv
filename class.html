@@ -20,110 +20,46 @@
     </header>
 
     <main style="margin-top:32px;">
-      <table id="classTable" class="classTable">
-        <thead>
-          <tr class="tabHead">
-            <th>Class</th>
-            <th> </th>
-            <th>Outbound Items</th>
-            <th class="check">  </th>
-          </tr>
-        </thead>
-        <tbody id="senior" class="classDropDown">
-          <tr class="tabHead">
-            <td>Name</td>
-            <td>Email</td>
-            <td>Outbound Items</td>
-            <td class="check"> </td>
-          </tr>
-          <tr class="student">
-            <td>Jim</td>
-            <td>fake@gmail.com</td>
-            <td>None</td>
-            <td class="check"> </td>
-          </tr>
-          <tr class="student" id="1234">
-            <td>John</td>
-            <td>fake@gmail.com</td>
-            <td>2</td>
-            <td class="check">
-              <div class="dropdown">
-                <button class="dropbtn" onclick="toggleDetails('1234')">Details</button>
-              </div>
-            </td>
-          </tr>
-          <tr class="tabHead 1234" style="display: none;">
-            <td>Item Name</td>
-            <td>SKU Number</td>
-            <td>Amount Outbound</td>
-            <td class="check"> </td>
-          </tr>
-          <tr class="item 1234" style="display: none;">
-            <td>Hammer</td>
-            <td>622452</td>
-            <td>1</td>
-            <td class="check"> </td>
-          </tr>
-        </tbody>
-        <tbody id="freshman" class="classDropDown">
-          <tr class="tabHead">
-            <td>Name</td>
-            <td>Email</td>
-            <td>Outbound Items</td>
-            <td class="check"> </td>
-          </tr>
-          <tr class="student">
-            <td>Jim</td>
-            <td>fake@gmail.com</td>
-            <td>None</td>
-            <td class="check"> </td>
-          </tr>
-          <tr class="student">
-            <td>John</td>
-            <td>fake@gmail.com</td>
-            <td>1</td>
-            <td class="check"> </td>
-          </tr>
-        </tbody>
-      </table>
-
       <div id="addClass">
         <label for="cName">Class Name</label><br>
         <input type="text" id="cName" name="cName" placeholder="Enter new class name"><br>
         <button onclick="testAddClass()">Add Class</button>
       </div>
 
-      <div>
-        <h3>Students to Add</h3>
-        <div id="addStudents">
-          <label for="sName">Student Name</label><br>
-          <input type="text" id="sName" name="sName" placeholder="Enter student name"><br>
-          <label for="sEmail">Student Email</label><br>
-          <input type="text" id="sEmail" name="sEmail" placeholder="Enter student email"><br>
-          <label for="sClass">Class</label><br>
-          <select id="sClass" name="sClass"></select><br>
-          <button onclick="testAddStudent()">Add Student</button>
-          <table id="stdTable">
-            <tr>
-              <th>Student Name</th>
-              <th>Email</th>
-              <th>Class</th>
-              <th>Action</th>
-            </tr>
-          </table>
-        </div>
+      <div id="addStudents" style="margin-top:32px;">
+        <h3>Add Student</h3>
+        <label for="sName">Student Name</label><br>
+        <input type="text" id="sName" name="sName" placeholder="Enter student name"><br>
+        <label for="sEmail">Student Email</label><br>
+        <input type="text" id="sEmail" name="sEmail" placeholder="Enter student email"><br>
+        <label for="sClass">Class</label><br>
+        <select id="sClass" name="sClass"></select><br>
+        <button onclick="testAddStudent()">Add Student</button>
       </div>
+
+      <table id="classTable" class="classTable">
+        <thead>
+          <tr class="tabHead">
+            <th>Class</th>
+            <th></th>
+            <th>Outbound Items</th>
+            <th class="check"></th>
+          </tr>
+        </thead>
+        <!-- Class rows and student rows will be added by JS -->
+      </table>
+
+      <table id="stdTable" style="margin-top:32px;">
+        <tr>
+          <th>Student Name</th>
+          <th>Email</th>
+          <th>Class</th>
+          <th>Action</th>
+        </tr>
+        <!-- Student rows for manual add will be added by JS if needed -->
+      </table>
     </main>
 
-    <script>
-      // Toggle details for student outbound items
-      function toggleDetails(id) {
-        const rows = document.querySelectorAll('.' + id);
-        rows.forEach(row => {
-          row.style.display = (row.style.display === 'none' || row.style.display === '') ? 'table-row' : 'none';
-        });
-      }
-    </script>
     <script src="classScript.js"></script>
   </body>
 </html>
