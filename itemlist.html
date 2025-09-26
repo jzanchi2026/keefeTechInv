@@ -113,7 +113,7 @@ async function loadTools() {
         RemoveBtn.innerText = "Remove";
         RemoveBtn.classList.add("remove-btn");
         console.log(tool);
-        RemoveBtn.dataset.toolTypeId = tool.toolTypeId; // Attach tool ID to button
+        RemoveBtn.dataset.toolTypeId = tool.toolTypeId; //Jimmy
 
         RemoveBtn.onclick = async function (e) {
         e.stopPropagation();
