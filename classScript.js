@@ -1,22 +1,31 @@
-const classes = ["Senior","Juniors" ,"Sophmore" ,"Freshman"]
-const studentIDs = ["1234"];
+// List of class names and student IDs
+const classes = ["Senior","Juniors" ,"Sophmore" ,"Freshman"];
+const studentIDs = [];
 
-function testAddStudent(){
-  var sName = document.getElementById("sName").value;
-  var sEmail = document.getElementById("sEmail").value;
+// Handles adding a student from the "Add Student" form
+function testAddStudent() {
+  var sName = document.getElementById("sName").value.trim();
+  var sEmail = document.getElementById("sEmail").value.trim();
   var sClass = document.getElementById("sClass").value;
+  // Validate input
   if (!sName || !sEmail || !sClass) {
     alert("Please fill in all fields.");
     return;
   }
+  // Generate a unique ID for the student (name-email-timestamp)
+  const stdId = (sName + "-" + sEmail + "-" + Date.now()).replace(/\s+/g, '');
+  // Reset form fields
   document.getElementById("sName").value = "";
   document.getElementById("sEmail").value = "";
-  document.getElementById("sClass").value = classes[0]; // reset to first class
-  addStudent(sClass, studentIDs.length + 1, sEmail, sName, 0);
+  document.getElementById("sClass").value = classes[0];
+  // Add student to selected class
+  addStudent(sClass, stdId, sEmail, sName, 0);
 }
 
+// Handles dropdown click for class or student to show/hide details
 function dropDownClick(year) {
   if(classes.includes(year)){
+    // Toggle class group visibility
     if(document.getElementById(year + "Drop").innerHTML.charCodeAt(0) == "8595"){
       document.getElementById(year + "Drop").innerHTML = "&#8593";
       document.getElementById(year).style.display = "table-row-group";
@@ -28,6 +37,7 @@ function dropDownClick(year) {
     console.log(document.getElementById(year + "Drop").innerHTML.codePointAt(0));
   }
   else if(studentIDs.includes(year)){
+    // Toggle student item details visibility
     let items = document.getElementsByClassName(year);
     console.log("std" + year);
     if(document.getElementById("std" + year).innerHTML.charCodeAt(0) == "8595"){
@@ -46,33 +56,36 @@ function dropDownClick(year) {
   }
   
   updateNumber();
-}
+}  
 
+// Updates the outbound item count for each class
 function updateNumber(){
   classes.forEach(numMath);
 }
 
+// Calculates total outbound items for a class
 function numMath(year){
   var total = 0;
+  // Start from row 1 to skip header
   for (let i = 1; i < document.getElementById(year).rows.length; i++) {
     if(document.getElementById(year).rows[i].cells[2].innerHTML != "none" && document.getElementById(year).rows[i].classList.contains("student")){
       total += parseInt(document.getElementById(year).rows[i].cells[2].innerHTML, 10);
     }
- 
   }
-
   if(total <= 0){
     total = "none";
   }
   document.getElementById(year + "Total").innerHTML = total;
 }
 
+// Adds a new class to the table and dropdown
 function addNewYear(year){
   if(classes.includes(year)){
     return;
   }
   classes.push(year);
 
+  // Create class header row
   const yearRow = document.createElement("tr");
 
   const col1 = document.createElement("td");
@@ -96,15 +109,13 @@ function addNewYear(year){
   const col4Div = document.createElement("div");
   col4Div.classList.add("dropdown");
   
+  // Add dropdown button for class
   const col4Btn = document.createElement("button");
   col4Btn.id = year + "Drop";
   col4Btn.classList.add("dropbtn");
   col4Btn.addEventListener("click",function(){ dropDownClick(year)});
   col4Btn.year = year;
   col4Btn.innerHTML ="&#8595";
-  //const col4Text = document.createTextNode("&#8595");
-
-  //col4Btn.appendChild(col4Text);
   col4Div.appendChild(col4Btn);
   col4.appendChild(col4Div);
   yearRow.appendChild(col4);
@@ -114,12 +125,14 @@ function addNewYear(year){
   addYearDrop(year);
 }
 
+// Adds the tbody for a class group
 function addYearDrop(year){
   const tbody = document.createElement("tbody");
   tbody.id = year;
   tbody.classList.add("classDropDown");
   tbody.style.display = "none";
 
+  // Add header row for students
   const row1 = document.createElement("tr");
   row1.classList.add("tabHead");
   
@@ -127,17 +140,14 @@ function addYearDrop(year){
 
   const col1 =document.createElement("td");
   col1.innerHTML = "name";
-
   row1.appendChild(col1);
   
   const col2 = document.createElement("td");
   col2.innerHTML = "email";
-
   row1.appendChild(col2);
 
   const col3 = document.createElement("td");
   col3.innerHTML = "amount of out bound items";
-  
   row1.appendChild(col3);
 
   const col4 =document.createElement("td");
@@ -145,25 +155,24 @@ function addYearDrop(year){
   row1.appendChild(col4);
 
   document.getElementById("classTable").appendChild(tbody);
-
 }
 
+// Adds a student row to the selected class
 function addStudent(year, stdId, email, name, outBound){
   if(classes.includes(year) && !studentIDs.includes(stdId)){
     studentIDs.push(stdId);
 
+    // Student row
     const row1 = document.createElement("tr");
     row1.classList.add("student");
     row1.id = stdId;
 
     const col1 = document.createElement("td");
     col1.innerHTML = name;
-
     row1.appendChild(col1);
 
     const col2 = document.createElement("td");
     col2.innerHTML = email;
-
     row1.appendChild(col2);
 
     const col3 = document.createElement("td");
@@ -173,9 +182,9 @@ function addStudent(year, stdId, email, name, outBound){
     else{
       col3.innerHTML = "none";
     }
-
     row1.appendChild(col3);
 
+    // Action buttons (details, delete)
     const col4 = document.createElement("td");
     col4.classList.add("check");
 
@@ -200,6 +209,7 @@ function addStudent(year, stdId, email, name, outBound){
 
     updateNumber();
 
+    // Add header for outbound items
     const row2 = document.createElement("tr");
     row2.classList.add("tabHead");
     row2.classList.add(stdId);
@@ -207,13 +217,10 @@ function addStudent(year, stdId, email, name, outBound){
 
     const col21 =  document.createElement("td");
     col21.innerHTML = "item name";
-
     const col22 =  document.createElement("td");
     col22.innerHTML = "sku number";
-    
     const col23 =  document.createElement("td");
     col23.innerHTML = "amount outbound";
-
     const col24 =  document.createElement("td");
     col24.classList.add("check");
 
@@ -223,12 +230,10 @@ function addStudent(year, stdId, email, name, outBound){
     row2.appendChild(col24);
     row1.after(row2);
   }
-
-  
 }
 
+// Adds an item row for a student
 function addStudentItems(stdId, toolID, toolName){
-
   const row1 = document.createElement("tr");
   row1.classList.add("item");
   row1.classList.add(stdId);
@@ -254,6 +259,7 @@ function addStudentItems(stdId, toolID, toolName){
   document.getElementsByClassName("tabHead " + stdId)[0].after(row1);
 }
 
+// Handles adding a class from the form
 function testAddClass(){
   var tName = document.getElementById("cName").value;
   document.getElementById("cName").value = "";
@@ -261,6 +267,7 @@ function testAddClass(){
   populateClassDropdown();
 }
 
+// Handles adding a student from the manual add table
 function testAddStudent(stdId){
   const stdElem = document.getElementById("add"+stdId);
   var stdYear = document.getElementById("slt").value;
@@ -271,6 +278,7 @@ function testAddStudent(stdId){
   stdElem.remove();
 }
 
+// Adds a student to the manual add table
 function addStudentToList(stdId, stdName, stdEmail){
   const row = document.createElement("tr");
   row.id = "add"+stdId;
@@ -305,6 +313,7 @@ function addStudentToList(stdId, stdName, stdEmail){
   document.getElementById("stdTable").appendChild(row);
 }
 
+// Shows confirmation dialog for deleting a student
 function deleteThis(stdId){
   const div = document.createElement("div");
   div.id = "confirm";
@@ -324,10 +333,12 @@ function deleteThis(stdId){
   document.body.appendChild(div);
 }
 
+// Cancels delete confirmation
 function dontDelete(){
   document.getElementById("confirm").remove();
 }
 
+// Confirms and deletes student and their items
 function confirmDelete(stdId){
   document.getElementById("confirm").remove();
   document.getElementById(stdId).remove();
@@ -338,6 +349,7 @@ function confirmDelete(stdId){
   }
 }
 
+// Populates the class dropdown in the "Add Student" form
 function populateClassDropdown() {
   const sClassSelect = document.getElementById("sClass");
   if (!sClassSelect) return;
@@ -350,5 +362,5 @@ function populateClassDropdown() {
   });
 }
 
-// Call this on page load and after adding a class
+// Populate dropdown on page load and after adding a class
 window.addEventListener("DOMContentLoaded", populateClassDropdown);
