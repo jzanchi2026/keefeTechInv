@@ -1,6 +1,6 @@
 // List of class names and student IDs
 const classes = ["Senior","Juniors" ,"Sophmore" ,"Freshman"];
-const studentIDs = [];
+const studentIDs = [1234];
 
 // Handles adding a student from the "Add Student" form
 function testAddStudent() {
@@ -269,8 +269,7 @@ function testAddClass(){
 
 // Handles adding a student from the manual add table
 function testAddStudent(stdId){
-  const stdElem = document.getElementById("add"+stdId);
-  var stdYear = document.getElementById("slt").value;
+  const stdElem = document.getElementById(sName);
   var stdEmail = stdElem.cells[1].innerHTML;
   var stdName = stdElem.cells[0].innerHTML;
   console.log(stdYear + ", " + stdEmail + ", " + stdName);
