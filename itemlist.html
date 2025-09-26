@@ -125,7 +125,6 @@ async function loadTools() {
             console.log(toolTypeId);
             const response = await fetch(`https://develmets.skiscratcher.com/removeToolType?id=${toolTypeId}`, {
             method: "DELETE",
-            //jimmy
             credentials: "include"
           });
 
