@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Classes</title>
+    <title>Class Management Dashboard</title>
     <link href="classStyle.css" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/x-icon" href="images/Logo.png">
     <!-- Google Fonts for Oswald -->
@@ -23,7 +23,7 @@
       <div id="addClass">
         <label for="cName">Class Name</label><br>
         <input type="text" id="cName" name="cName" placeholder="Enter new class name"><br>
-        <button onclick="testAddClass()">Add Class</button>
+        <button onclick="addClass()">Add Class</button>
       </div>
 
       <div id="addStudents" style="margin-top:32px;">
@@ -34,32 +34,95 @@
         <input type="text" id="sEmail" name="sEmail" placeholder="Enter student email"><br>
         <label for="sClass">Class</label><br>
         <select id="sClass" name="sClass"></select><br>
-        <button onclick="testAddStudent()">Add Student</button>
+        <button onclick="addStudent()">Add Student</button>
       </div>
 
-      <table id="classTable" class="classTable">
-        <thead>
-          <tr class="tabHead">
-            <th>Class</th>
-            <th></th>
-            <th>Outbound Items</th>
-            <th class="check"></th>
-          </tr>
-        </thead>
-        <!-- Class rows and student rows will be added by JS -->
-      </table>
-
-      <table id="stdTable" style="margin-top:32px;">
-        <tr>
-          <th>Student Name</th>
-          <th>Email</th>
-          <th>Class</th>
-          <th>Action</th>
-        </tr>
-        <!-- Student rows for manual add will be added by JS if needed -->
-      </table>
+      <div style="margin-top:40px;">
+        <h3>Classrooms & Students</h3>
+        <div id="classrooms"></div>
+      </div>
     </main>
 
-    <script src="classScript.js"></script>
+    <script>
+      // Store classes and students in memory
+      const classes = [];
+      const studentsByClass = {};
+
+      // Add a new class
+      function addClass() {
+        const cName = document.getElementById("cName").value.trim();
+        if (!cName) {
+          alert("Please enter a class name.");
+          return;
+        }
+        if (classes.includes(cName)) {
+          alert("Class already exists.");
+          return;
+        }
+        classes.push(cName);
+        studentsByClass[cName] = [];
+        document.getElementById("cName").value = "";
+        updateClassDropdown();
+        renderClassrooms();
+      }
+
+      // Update the class dropdown in the Add Student form
+      function updateClassDropdown() {
+        const sClassSelect = document.getElementById("sClass");
+        sClassSelect.innerHTML = "";
+        classes.forEach(cls => {
+          const option = document.createElement("option");
+          option.value = cls;
+          option.textContent = cls;
+          sClassSelect.appendChild(option);
+        });
+      }
+
+      // Add a student to the selected class
+      function addStudent() {
+        const sName = document.getElementById("sName").value.trim();
+        const sEmail = document.getElementById("sEmail").value.trim();
+        const sClass = document.getElementById("sClass").value;
+        if (!sName || !sEmail || !sClass) {
+          alert("Please fill in all fields.");
+          return;
+        }
+        studentsByClass[sClass].push({ name: sName, email: sEmail });
+        document.getElementById("sName").value = "";
+        document.getElementById("sEmail").value = "";
+        renderClassrooms();
+      }
+
+      // Render all classrooms and their students
+      function renderClassrooms() {
+        const container = document.getElementById("classrooms");
+        container.innerHTML = "";
+        classes.forEach(cls => {
+          const classDiv = document.createElement("div");
+          classDiv.className = "classroom-block";
+          classDiv.style.marginBottom = "32px";
+          classDiv.innerHTML = `<h4 style="color:#d32f2f;">${cls}</h4>`;
+          const table = document.createElement("table");
+          table.className = "classTable";
+          table.style.width = "100%";
+          table.innerHTML = `
+            <tr>
+              <th>Student Name</th>
+              <th>Email</th>
+            </tr>
+          `;
+          studentsByClass[cls].forEach(student => {
+            const row = document.createElement("tr");
+            row.innerHTML = `<td>${student.name}</td><td>${student.email}</td>`;
+            table.appendChild(row);
+          });
+          classDiv.appendChild(table);
+          container.appendChild(classDiv);
+        });
+      }
+
+      // Initialize dropdown on page load
+      window.addEventListener("DOMContentLoaded", updateClassDropdown);
+    </script>
   </body>
 </html>
