@@ -112,7 +112,7 @@ async function loadTools() {
         // Add Remove button inside the border
         RemoveBtn.innerText = "Remove";
         RemoveBtn.classList.add("remove-btn");
-        RemoveBtn.dataset.toolId = tool.toolID; // Attach tool ID to button
+        RemoveBtn.dataset.toolTypeId = tool.toolTypeID; // Attach tool ID to button
 
         RemoveBtn.onclick = async function(e) {
           e.stopPropagation();
@@ -120,9 +120,10 @@ async function loadTools() {
           if (confirm(`Are you sure you want to remove ${tool.toolName}?`)) {
             try {
               const fd = new URLSearchParams({
-                id: RemoveBtn.dataset.toolId // Use tool ID for removal
+                id: RemoveBtn.dataset.toolTypeId // Use tool ID for removal
               });
-              const response = await fetch("https://develmets.skiscratcher.com/removeToolType?=id", {
+              const toolId = RemoveBtn.dataset.toolId;
+              const response = await fetch(`https://develmets.skiscratcher.com/removeToolType?id=${toolId}`, {
                 method: "POST",
                 body: fd,
                 headers: {
