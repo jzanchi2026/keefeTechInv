@@ -65,22 +65,55 @@
       const studentsByClass = {};
 
       // Add a new class
-      function addClass() {
-        const cName = document.getElementById("cName").value.trim();
-        if (!cName) {
-          alert("Please enter a class name.");
-          return;
-        }
-        if (classes.includes(cName)) {
-          alert("Class already exists.");
-          return;
-        }
-        classes.push(cName);
-        studentsByClass[cName] = [];
-        document.getElementById("cName").value = "";
-        updateClassDropdown();
-        renderClassrooms();
-      }
+      async function addClass() {
+  const cName = document.getElementById("cName").value.trim();
+  if (!cName) {
+    alert("Please enter a class name.");
+    return;
+  }
+  // Send POST request to create class in the database
+  try {
+    const response = await fetch("https://develmets.skiscratcher.com/createClass", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ name: cName }),
+      credentials: "include"
+    });
+    if (!response.ok) {
+      alert("Failed to create class.");
+      return;
+    }
+    document.getElementById("cName").value = "";
+    await fetchAndRenderClasses(); // Update the UI with new classes from the database
+  } catch (err) {
+    alert("Error creating class: " + err);
+  }
+}
+
+      // Fetch classes from the database and update dropdown and classroom list
+      async function fetchAndRenderClasses() {
+  try {
+    const response = await fetch("https://develmets.skiscratcher.com/getClasses", {
+      method: "GET",
+      credentials: "include"
+    });
+    if (!response.ok) {
+      alert("Failed to fetch classes.");
+      return;
+    }
+    const classList = await response.json();
+    // Update local classes and studentsByClass
+    classes.length = 0;
+    classList.forEach(cls => {
+      classes.push(cls.name);
+      if (!studentsByClass[cls.name]) studentsByClass[cls.name] = [];
+    });
+    updateClassDropdown();
+    renderClassrooms();
+  } catch (err) {
+    alert("Error fetching classes: " + err);
+  }
+}
 
       // Update the class dropdown in the Add Student form
       function updateClassDropdown() {
@@ -138,7 +171,7 @@
       }
 
       // Initialize dropdown on page load
-      window.addEventListener("DOMContentLoaded", updateClassDropdown);
+      window.addEventListener("DOMContentLoaded", fetchAndRenderClasses);
 
       document.getElementById("addAllUsersBtn").onclick = async function() {
   const sClass = document.getElementById("sClass").value;
