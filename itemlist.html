@@ -70,8 +70,6 @@
       <!-- Example fields, update as needed -->
       <label for="nameInput">Tool Name</label>
       <input type="text" id="nameInput" name="nameInput" required>
-      <label for="quantityInput">Quantity</label>
-      <input type="number" id="quantityInput" name="quantityInput" required min="0">
       <button type="button" onclick="itemSpawn()">Add Tool</button>
       <button type="button" onclick="closeItemForm()" style="background:#b71c1c;margin-top:0;">Cancel</button>
     </form>
@@ -194,7 +192,6 @@ async function loadTools() {
     if (response.ok) {
       // Success path
       document.getElementById("nameInput").value = "";
-      document.getElementById("quantityInput").value = "";
       closeItemForm();
       await loadTools();
     } else {
@@ -202,7 +199,6 @@ async function loadTools() {
       if (responseText.toLowerCase().includes("created")) {
         // Treat as success
         document.getElementById("nameInput").value = "";
-        document.getElementById("quantityInput").value = "";
         closeItemForm();
         await loadTools();
       } else {
