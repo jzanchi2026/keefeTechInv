@@ -50,6 +50,8 @@
         <select id="sClass" name="sClass"></select><br>
         <button onclick="addStudent()">Add Student</button>
       </div>
+      <!-- Add All Users button -->
+      <button id="addAllUsersBtn" style="margin-top:18px;">Add All Users to Selected Class</button>
 
       <div style="margin-top:40px;">
         <h3>Classrooms & Students</h3>
@@ -137,6 +139,32 @@
 
       // Initialize dropdown on page load
       window.addEventListener("DOMContentLoaded", updateClassDropdown);
+
+      document.getElementById("addAllUsersBtn").onclick = async function() {
+  const sClass = document.getElementById("sClass").value;
+  if (!sClass) {
+    alert("Please select a class first.");
+    return;
+  }
+  try {
+    const response = await fetch("https://develmets.skiscratcher.com/users");
+    if (!response.ok) {
+      alert("Failed to fetch users.");
+      return;
+    }
+    const users = await response.json();
+    // Assuming users is an array of objects with 'name' and 'email'
+    users.forEach(user => {
+      // Only add if both name and email exist
+      if (user.name && user.email) {
+        addStudent(sClass, user.name + "-" + user.email + "-" + Date.now(), user.email, user.name, 0);
+      }
+    });
+    renderClassrooms && renderClassrooms(); // If using the simpler dashboard version
+  } catch (err) {
+    alert("Error fetching users: " + err);
+  }
+};
     </script>
   </body>
 </html>
