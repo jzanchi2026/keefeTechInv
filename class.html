@@ -205,13 +205,13 @@ async function renderUserList() {
           return;
         }
         // Add student to class
-        studentsByClass[sClass].push({ name: user.name, email: user.email });
+        studentsByClass[sClass].push({ name: user.displayName, email: user.email });
         renderClassrooms();
       };
       row.appendChild(addBtn);
       // Student info
       const info = document.createElement("span");
-      info.textContent = `${user.name} (${user.email})`;
+      info.textContent = `${user.displayName} (${user.email})`;
       row.appendChild(info);
       userListDiv.appendChild(row);
     });
