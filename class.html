@@ -183,7 +183,7 @@ async function renderUserList() {
     }
     const users = await response.json();
     // Filter out admins (assuming user.role or user.isAdmin)
-    const filtered = users.filter(user => !user.isAdmin && user.role !== "admin");
+    const filtered = users.filter(user => user.userType == 1);
     if (filtered.length === 0) {
       userListDiv.innerHTML = "<b>No students found.</b>";
       return;
