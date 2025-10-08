@@ -105,8 +105,8 @@
     // Update local classes and studentsByClass
     classes.length = 0;
     classList.forEach(cls => {
-      classes.push(cls.name);
-      if (!studentsByClass[cls.name]) studentsByClass[cls.name] = [];
+      classes.push(cls.className);
+      if (!studentsByClass[cls.className]) studentsByClass[cls.className] = [];
     });
     updateClassDropdown();
     renderClassrooms();
