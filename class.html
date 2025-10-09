@@ -227,7 +227,7 @@ async function renderUserList() {
       addBtn.style.marginRight = "12px";
       addBtn.onclick = function () {
         const sClass = document.getElementById("sClass").value;
-        const classObj = classes.find(cls => cls.className === sClass);
+        const classObj = classes.find(cls => cls.className == sClass);
         if (!classObj) {
           alert("Please select a class first.");
           return;
