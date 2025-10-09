@@ -186,7 +186,8 @@ async function fetchAssignedStudents() {
     // Ignore errors for now
   }
 }
-
+let classIdToName = {};
+// Fetch users and display them with add buttons (excluding already assigned students)
 // Fetch users and display them with add buttons (excluding already assigned students)
 async function renderUserList() {
   const userListDiv = document.getElementById("userList");
@@ -200,24 +201,30 @@ async function renderUserList() {
       userListDiv.innerHTML = "<b>Failed to fetch users.</b>";
       return;
     }
+
     const users = await response.json();
+
     // Filter out admins and already assigned students
     const filtered = users.filter(user => user.userType == 1 && !assignedStudentIds.has(user.id));
+
     if (filtered.length === 0) {
       userListDiv.innerHTML = "<b>No students available to add.</b>";
       return;
     }
+
     userListDiv.innerHTML = "";
+
     filtered.forEach(user => {
       const row = document.createElement("div");
       row.style.display = "flex";
       row.style.alignItems = "center";
       row.style.marginBottom = "8px";
+
       // Add button
       const addBtn = document.createElement("button");
       addBtn.textContent = "+";
       addBtn.style.marginRight = "12px";
-      addBtn.onclick = function() {
+      addBtn.onclick = function () {
         const sClass = document.getElementById("sClass").value;
         const classObj = classes.find(cls => cls.className === sClass);
         if (!classObj) {
@@ -227,10 +234,13 @@ async function renderUserList() {
         addStudentToClass(user, classObj.id);
       };
       row.appendChild(addBtn);
-      // Student info
+
+      // Student info with class name
       const info = document.createElement("span");
-      info.textContent = `${user.displayName} (${user.email})`;
+      const className = classIdToName[user.classId] || "No class assigned";
+      info.textContent = `${user.displayName} (${user.email}) – Class: ${className}`;
       row.appendChild(info);
+
       userListDiv.appendChild(row);
     });
   } catch (err) {
